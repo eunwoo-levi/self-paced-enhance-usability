@@ -13,7 +13,7 @@ const FlightBooking = () => {
     setAdultCount(newCount);
 
     if (newCount === MAX_PASSENGERS) {
-      setAnnouncement("최대 승객 수에 도달했습니다.");
+      setAnnouncement("최대 승객 수에 도달했습니다. 성인 승객 3명");
     } else {
       setAnnouncement(`성인 승객 ${newCount}명`);
     }
@@ -22,7 +22,12 @@ const FlightBooking = () => {
   const decrementCount = () => {
     const newCount = Math.max(1, adultCount - 1);
     setAdultCount(newCount);
-    setAnnouncement(`성인 승객 ${newCount}명`);
+
+    if (newCount === 1) {
+      setAnnouncement("최소 승객 수에 도달했습니다. 성인 승객 1명");
+    } else {
+      setAnnouncement(`성인 승객 ${newCount}명`);
+    }
   };
 
   return (
@@ -57,7 +62,7 @@ const FlightBooking = () => {
         </fieldset>
         <button type="submit" className="search-button">항공편 검색</button>
       </form>
-      <div aria-live="assertive" aria-atomic="true" className="sr-only">
+      <div aria-live="assertive" aria-atomic="true" role="status" className="sr-only">
         {announcement}
       </div>
     </article>
